@@ -1,0 +1,52 @@
+:root {
+	--cream: #faf6f1;
+	--blush: #e8c4b8;
+	--dusty-rose: #c9907e;
+	--sage: #a8b5a0;
+	--mocha: #7a5c52;
+	--text: #3d2e28;
+	--text-light: #8a7168;
+	--border: #e8ddd6;
+	--radius-card: 12px;
+	--radius-btn: 50px;
+	--font-heading: 'Cormorant Garamond', Georgia, serif;
+	--font-body: 'DM Sans', system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-family: var(--font-body);
+	color: var(--text);
+	background: var(--cream);
+	-webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-heading);
+	font-weight: 400;
+}
+
+a {
+	color: inherit;
+}
+
+button {
+	font-family: var(--font-body);
+	cursor: pointer;
+}
+
+input {
+	font-family: var(--font-body);
+}
