@@ -11,5 +11,4 @@ jobs:
     steps:
       - name: Ping Supabase
         run: |
-          curl --silent --fail \
-            "${{ secrets.SUPABASE_URL }}/auth/v1/health"
+          curl --silent "${{ secrets.SUPABASE_URL }}/auth/v1/health" || true
