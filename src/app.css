@@ -1,14 +1,14 @@
 :root {
-	--cream: #faf6f1;
-	--blush: #e8c4b8;
-	--dusty-rose: #c9907e;
-	--sage: #a8b5a0;
-	--mocha: #7a5c52;
-	--text: #3d2e28;
-	--text-light: #8a7168;
-	--border: #e8ddd6;
-	--radius-card: 12px;
-	--radius-btn: 50px;
+	--cream: #fafafa;
+	--blush: #f3e4da;
+	--dusty-rose: #b5502e;
+	--sage: #5c6b3d;
+	--mocha: #141414;
+	--text: #141414;
+	--text-light: #6b6258;
+	--border: #e8e1da;
+	--radius-card: 4px;
+	--radius-btn: 6px;
 	--font-heading: 'Cormorant Garamond', Georgia, serif;
 	--font-body: 'DM Sans', system-ui, sans-serif;
 }
@@ -34,8 +34,9 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: var(--font-heading);
-	font-weight: 400;
+	font-family: var(--font-body);
+	font-weight: 600;
+	letter-spacing: -0.01em;
 }
 
 a {
@@ -49,4 +50,14 @@ button {
 
 input {
 	font-family: var(--font-body);
+}
+
+/* Subtle woven-fabric grain overlay — use sparingly (hero sections, material moments) */
+.fabric-texture {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	opacity: 0.05;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	background-size: 120px 120px;
 }

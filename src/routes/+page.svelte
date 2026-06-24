@@ -56,6 +56,7 @@
 <!-- HEADER BAR: title left, CTAs right -->
 <section class="header-bar">
 	<div class="header-bg" aria-hidden="true"></div>
+	<div class="fabric-texture" aria-hidden="true"></div>
 
 	<div class="header-title">
 		<p class="eyebrow">Your colour season awaits</p>
@@ -178,9 +179,9 @@
 <footer>
 	<div class="footer-logo">season<em>it</em></div>
 	<ul class="footer-links">
-		<li><a href="#">About</a></li>
-		<li><a href="#">Privacy</a></li>
-		<li><a href="#">Terms</a></li>
+		<li><a href="/about">About</a></li>
+		<li><a href="/privacy">Privacy</a></li>
+		<li><a href="/terms">Terms</a></li>
 		<li><a href="#">Contact</a></li>
 	</ul>
 	<p class="footer-copy">© 2026 Seasonit. All rights reserved.</p>
@@ -258,13 +259,13 @@
 <style>
 	/* ── Variables ── */
 	:root {
-		--l-rose: #c4856a;
-		--l-rose-deep: #a06652;
-		--l-ink: #2c1f1a;
-		--l-ink-soft: #5c4a42;
-		--l-ink-muted: #9b8880;
-		--l-blush: #f5e6e0;
-		--l-blush-mid: #e8c9bb;
+		--l-rose: #b5502e;
+		--l-rose-deep: #8f3e22;
+		--l-ink: #141414;
+		--l-ink-soft: #4a4540;
+		--l-ink-muted: #8a8278;
+		--l-blush: #f3e4da;
+		--l-blush-mid: #e0b8a0;
 	}
 
 	/* ── Nav ── */
@@ -280,7 +281,7 @@
 		padding: 1.25rem 4rem;
 		background: rgba(250, 246, 241, 0.92);
 		backdrop-filter: blur(12px);
-		border-bottom: 1px solid rgba(196, 133, 106, 0.12);
+		border-bottom: 1px solid rgba(181, 80, 46, 0.12);
 	}
 
 	.nav-logo {
@@ -344,7 +345,7 @@
 		gap: 4rem;
 		padding: 6rem 4rem 2.5rem;
 		position: relative;
-		border-bottom: 1px solid rgba(44, 31, 26, 0.07);
+		border-bottom: 1px solid rgba(20, 20, 20, 0.07);
 	}
 
 	.header-bg {
@@ -379,10 +380,11 @@
 	}
 
 	h1 {
-		font-family: var(--font-heading);
+		font-family: var(--font-body);
 		font-size: clamp(2.25rem, 4vw, 3.5rem);
-		font-weight: 400;
-		line-height: 1.1;
+		font-weight: 700;
+		letter-spacing: -0.01em;
+		line-height: 1.05;
 		color: var(--l-ink);
 		margin: 0;
 	}
@@ -447,7 +449,7 @@
 		gap: 0.5rem;
 		padding: 0.7rem 1rem;
 		background: white;
-		border: 1px solid rgba(44, 31, 26, 0.15);
+		border: 1px solid rgba(20, 20, 20, 0.15);
 		border-radius: 2px;
 		font-family: var(--font-body);
 		font-size: 0.8125rem;
@@ -460,7 +462,7 @@
 
 	.btn-google:hover {
 		border-color: var(--l-rose);
-		box-shadow: 0 2px 8px rgba(196, 133, 106, 0.12);
+		box-shadow: 0 2px 8px rgba(181, 80, 46, 0.12);
 	}
 
 	.header-note {
@@ -493,11 +495,12 @@
 	}
 
 	.section-title {
-		font-family: var(--font-heading);
+		font-family: var(--font-body);
 		font-size: clamp(2rem, 4vw, 3rem);
-		font-weight: 400;
+		font-weight: 700;
+		letter-spacing: -0.01em;
 		color: var(--l-ink);
-		line-height: 1.15;
+		line-height: 1.1;
 		margin-bottom: 3rem;
 		max-width: 500px;
 	}
@@ -666,7 +669,7 @@
 	.modal-overlay {
 		position: fixed;
 		inset: 0;
-		background: rgba(44, 31, 26, 0.5);
+		background: rgba(20, 20, 20, 0.5);
 		z-index: 200;
 		display: flex;
 		align-items: center;
@@ -743,7 +746,7 @@
 		gap: 0.75rem;
 		padding: 0.8rem;
 		background: white;
-		border: 1px solid rgba(44, 31, 26, 0.15);
+		border: 1px solid rgba(20, 20, 20, 0.15);
 		border-radius: 2px;
 		font-family: var(--font-body);
 		font-size: 0.875rem;
@@ -770,7 +773,7 @@
 		content: '';
 		flex: 1;
 		height: 1px;
-		background: rgba(44, 31, 26, 0.1);
+		background: rgba(20, 20, 20, 0.1);
 	}
 
 	.modal-inputs {
@@ -782,7 +785,7 @@
 
 	.modal-input {
 		padding: 0.75rem 1rem;
-		border: 1px solid rgba(44, 31, 26, 0.15);
+		border: 1px solid rgba(20, 20, 20, 0.15);
 		border-radius: 2px;
 		font-family: var(--font-body);
 		font-size: 0.875rem;
