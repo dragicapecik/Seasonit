@@ -259,12 +259,12 @@
 <style>
 	/* ── Variables ── */
 	:root {
-		--l-rose: #b5502e;
+		--l-rose: var(--dusty-rose);
 		--l-rose-deep: #8f3e22;
-		--l-ink: #141414;
+		--l-ink: var(--mocha);
 		--l-ink-soft: #4a4540;
 		--l-ink-muted: #8a8278;
-		--l-blush: #f3e4da;
+		--l-blush: var(--blush);
 		--l-blush-mid: #e0b8a0;
 	}
 

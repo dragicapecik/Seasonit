@@ -1,3 +1,8 @@
+<script lang="ts">
+	import HelperPageHeader from '$lib/components/HelperPageHeader.svelte';
+	import HelperPageFooter from '$lib/components/HelperPageFooter.svelte';
+</script>
+
 <svelte:head>
 	<title>About — Seasonit</title>
 	<meta
@@ -7,10 +12,7 @@
 </svelte:head>
 
 <div class="page">
-	<header class="top-bar">
-		<a href="/" class="logo">season<em>it</em></a>
-		<a href="/" class="back-link">← Back to home</a>
-	</header>
+	<HelperPageHeader />
 
 	<main class="content">
 		<p class="eyebrow">About Seasonit</p>
@@ -89,13 +91,10 @@
 		<a href="/#seasons" class="cta">Find your season →</a>
 	</main>
 
-	<footer class="bottom-footer">
-		<a href="/">season<em>it</em></a>
-		<div class="footer-links">
-			<a href="/privacy">Privacy Policy</a>
-			<a href="/terms">Terms of Service</a>
-		</div>
-	</footer>
+	<HelperPageFooter>
+		<a href="/privacy">Privacy Policy</a>
+		<a href="/terms">Terms of Service</a>
+	</HelperPageFooter>
 </div>
 
 <style>
@@ -103,38 +102,6 @@
 		min-height: 100vh;
 		display: flex;
 		flex-direction: column;
-	}
-
-	.top-bar {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 1.25rem 2rem;
-		border-bottom: 1px solid var(--border);
-	}
-
-	.logo {
-		font-family: var(--font-heading);
-		font-size: 1.5rem;
-		color: var(--mocha);
-		letter-spacing: 0.02em;
-		text-decoration: none;
-	}
-
-	.logo em {
-		font-style: italic;
-		color: var(--dusty-rose);
-	}
-
-	.back-link {
-		font-size: 0.875rem;
-		color: var(--text-light);
-		text-decoration: none;
-		transition: color 0.15s;
-	}
-
-	.back-link:hover {
-		color: var(--mocha);
 	}
 
 	.content {
@@ -256,41 +223,6 @@
 		background: var(--dusty-rose);
 	}
 
-	.bottom-footer {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 1.5rem 2rem;
-		border-top: 1px solid var(--border);
-		font-size: 0.8125rem;
-	}
-
-	.bottom-footer > a {
-		font-family: var(--font-heading);
-		font-size: 1.1rem;
-		color: var(--mocha);
-		text-decoration: none;
-	}
-
-	.bottom-footer > a em {
-		font-style: italic;
-		color: var(--dusty-rose);
-	}
-
-	.footer-links {
-		display: flex;
-		gap: 1.5rem;
-	}
-
-	.footer-links a {
-		color: var(--text-light);
-		text-decoration: none;
-	}
-
-	.footer-links a:hover {
-		color: var(--mocha);
-	}
-
 	@media (max-width: 700px) {
 		.steps-grid {
 			grid-template-columns: 1fr;
@@ -299,10 +231,6 @@
 	}
 
 	@media (max-width: 480px) {
-		.top-bar {
-			padding: 1rem;
-		}
-
 		h1 {
 			font-size: 2rem;
 		}

@@ -31,6 +31,8 @@
 	});
 
 	let selected: (typeof nodes)[0] | null = null;
+
+	$: moods = selected ? [...new Set(selected.swatches.map(colorMood))] : [];
 </script>
 
 {#if compact}
@@ -134,7 +136,7 @@
 						</div>
 
 						<div class="mood-tags">
-							{#each [...new Set(selected.swatches.map(colorMood))] as mood}
+							{#each moods as mood}
 								<span class="mood-tag">{mood}</span>
 							{/each}
 						</div>

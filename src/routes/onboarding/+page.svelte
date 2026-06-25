@@ -79,19 +79,24 @@
 		currentStep: number,
 		selectedSeason: string,
 		selectedGender: string,
+		selectedCountry: string,
+		minPrice: number,
+		maxPrice: number,
 		selectedMaterials: string[]
 	): string {
 		if (currentStep === 1) return selectedSeason === '' ? 'Select a colour season to continue.' : '';
 
 		const missing = [
 			selectedGender === '' && 'your gender',
+			selectedCountry === '' && 'your country',
+			!(Number(maxPrice) > Number(minPrice) && Number(maxPrice) <= 500) && 'a valid price range',
 			selectedMaterials.length === 0 && 'at least one material preference'
 		].filter(Boolean);
 
 		return missing.length ? `Select ${missing.join(' and ')} to continue.` : '';
 	}
 
-	$: hint = missingHint(step, season, gender, materials);
+	$: hint = missingHint(step, season, gender, countryCode, priceMin, priceMax, materials);
 
 	function next() {
 		if (canNext && step < TOTAL) step++;
@@ -105,22 +110,20 @@
 		selectedShops = [];
 	}
 
+	function toggleInArray(arr: string[], value: string): string[] {
+		return arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value];
+	}
+
 	function toggleShop(id: string) {
-		selectedShops = selectedShops.includes(id)
-			? selectedShops.filter((s) => s !== id)
-			: [...selectedShops, id];
+		selectedShops = toggleInArray(selectedShops, id);
 	}
 
 	function toggleMaterial(id: string) {
-		materials = materials.includes(id)
-			? materials.filter((m) => m !== id)
-			: [...materials, id];
+		materials = toggleInArray(materials, id);
 	}
 
 	function toggleSize(size: string) {
-		clothingSizes = clothingSizes.includes(size)
-			? clothingSizes.filter((s) => s !== size)
-			: [...clothingSizes, size];
+		clothingSizes = toggleInArray(clothingSizes, size);
 	}
 
 	async function finish() {
@@ -182,12 +185,13 @@
 			<div class="season-layout">
 				<div class="season-grid">
 					{#each SEASONS as s}
-						<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 						<button
 							class="season-card"
 							class:selected={season === s.id}
 							on:mouseenter={() => (previewId = s.id)}
 							on:mouseleave={() => (previewId = null)}
+							on:focus={() => (previewId = s.id)}
+							on:blur={() => (previewId = null)}
 							on:click={() => (season = s.id)}
 							type="button"
 						>

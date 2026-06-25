@@ -1,4 +1,8 @@
 <script lang="ts">
+	import HelperPageHeader from '$lib/components/HelperPageHeader.svelte';
+	import HelperPageFooter from '$lib/components/HelperPageFooter.svelte';
+	import LangToggle from '$lib/components/LangToggle.svelte';
+
 	let lang: 'en' | 'hr' = 'en';
 </script>
 
@@ -7,16 +11,10 @@
 </svelte:head>
 
 <div class="page">
-	<header class="top-bar">
-		<a href="/" class="logo">season<em>it</em></a>
-		<a href="/" class="back-link">← Back to home</a>
-	</header>
+	<HelperPageHeader />
 
 	<main class="content">
-		<div class="lang-toggle">
-			<button class:active={lang === 'en'} on:click={() => (lang = 'en')} type="button">EN</button>
-			<button class:active={lang === 'hr'} on:click={() => (lang = 'hr')} type="button">HR</button>
-		</div>
+		<LangToggle bind:lang />
 
 		{#if lang === 'en'}
 			<h1>Privacy Policy</h1>
@@ -185,10 +183,9 @@
 		{/if}
 	</main>
 
-	<footer class="bottom-footer">
-		<a href="/">season<em>it</em></a>
+	<HelperPageFooter>
 		<a href="/terms">Terms of Service</a>
-	</footer>
+	</HelperPageFooter>
 </div>
 
 <style>
@@ -198,69 +195,12 @@
 		flex-direction: column;
 	}
 
-	.top-bar {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 1.25rem 2rem;
-		border-bottom: 1px solid var(--border);
-	}
-
-	.logo {
-		font-family: var(--font-heading);
-		font-size: 1.5rem;
-		color: var(--mocha);
-		letter-spacing: 0.02em;
-		text-decoration: none;
-	}
-
-	.logo em {
-		font-style: italic;
-		color: var(--dusty-rose);
-	}
-
-	.back-link {
-		font-size: 0.875rem;
-		color: var(--text-light);
-		text-decoration: none;
-		transition: color 0.15s;
-	}
-
-	.back-link:hover {
-		color: var(--mocha);
-	}
-
 	.content {
 		flex: 1;
 		max-width: 680px;
 		margin: 0 auto;
 		width: 100%;
 		padding: 3rem 1.5rem 5rem;
-	}
-
-	.lang-toggle {
-		display: inline-flex;
-		gap: 0.25rem;
-		margin-bottom: 2rem;
-		border: 1px solid var(--border);
-		border-radius: var(--radius-btn);
-		padding: 0.25rem;
-	}
-
-	.lang-toggle button {
-		padding: 0.375rem 1rem;
-		border: none;
-		background: transparent;
-		border-radius: var(--radius-btn);
-		font-size: 0.8125rem;
-		font-weight: 500;
-		color: var(--text-light);
-		transition: background 0.15s, color 0.15s;
-	}
-
-	.lang-toggle button.active {
-		background: var(--mocha);
-		color: white;
 	}
 
 	h1 {
@@ -306,40 +246,7 @@
 		margin-bottom: 0.25rem;
 	}
 
-	.bottom-footer {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 1.5rem 2rem;
-		border-top: 1px solid var(--border);
-		font-size: 0.8125rem;
-	}
-
-	.bottom-footer a {
-		text-decoration: none;
-		color: var(--text-light);
-	}
-
-	.bottom-footer a:first-child {
-		font-family: var(--font-heading);
-		font-size: 1.1rem;
-		color: var(--mocha);
-	}
-
-	.bottom-footer a:first-child em {
-		font-style: italic;
-		color: var(--dusty-rose);
-	}
-
-	.bottom-footer a:hover {
-		color: var(--mocha);
-	}
-
 	@media (max-width: 480px) {
-		.top-bar {
-			padding: 1rem;
-		}
-
 		h1 {
 			font-size: 2rem;
 		}
