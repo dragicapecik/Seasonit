@@ -1,3 +1,9 @@
+<script lang="ts">
+	import type { PageData } from './$types';
+
+	let { data }: { data: PageData } = $props();
+</script>
+
 <svelte:head>
 	<title>Seasonit</title>
 </svelte:head>
@@ -14,7 +20,29 @@
 
 <main>
 	<h1>Your Season</h1>
-	<p>Dashboard coming soon.</p>
+
+	{#if data.products.length === 0}
+		<p class="empty">No products yet — crawler hasn't found anything for you.</p>
+	{:else}
+		<div class="grid">
+			{#each data.products as product (product.id)}
+				<a
+					class="card"
+					href={product.affiliate_url ?? product.product_url}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					{#if product.image_url}
+						<img src={product.image_url} alt={product.name} loading="lazy" />
+					{/if}
+					<div class="card-body">
+						<p class="name">{product.name}</p>
+						<p class="price">{product.price} {product.currency}</p>
+					</div>
+				</a>
+			{/each}
+		</div>
+	{/if}
 </main>
 
 <style>
@@ -77,11 +105,6 @@
 
 	main {
 		min-height: calc(100vh - 73px);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		gap: 1rem;
 		padding: 2rem;
 	}
 
@@ -89,9 +112,60 @@
 		font-family: var(--font-heading);
 		font-size: 3rem;
 		color: var(--mocha);
+		margin-bottom: 1.5rem;
 	}
 
-	p {
+	.empty {
 		color: var(--text-light);
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+		gap: 1.5rem;
+	}
+
+	.card {
+		display: flex;
+		flex-direction: column;
+		text-decoration: none;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-card);
+		overflow: hidden;
+		background: white;
+		transition: border-color 0.15s;
+	}
+
+	.card:hover {
+		border-color: var(--dusty-rose);
+	}
+
+	.card img {
+		width: 100%;
+		aspect-ratio: 3 / 4;
+		object-fit: cover;
+		background: var(--blush);
+	}
+
+	.card-body {
+		padding: 0.75rem 1rem;
+	}
+
+	.name {
+		font-size: 0.875rem;
+		color: var(--text);
+		line-height: 1.3;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.price {
+		font-family: var(--font-heading);
+		font-size: 1.1rem;
+		color: var(--dusty-rose);
+		margin-top: 0.4rem;
 	}
 </style>
