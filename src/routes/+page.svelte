@@ -182,7 +182,7 @@
 		<li><a href="/about">About</a></li>
 		<li><a href="/privacy">Privacy</a></li>
 		<li><a href="/terms">Terms</a></li>
-		<li><a href="#">Contact</a></li>
+		<li><a href="/about">Contact</a></li>
 	</ul>
 	<p class="footer-copy">© 2026 Seasonit. All rights reserved.</p>
 </footer>
