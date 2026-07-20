@@ -18,29 +18,6 @@
 			<p class="error">{form.message}</p>
 		{/if}
 
-		<form method="POST" use:enhance>
-			<div class="field">
-				<label for="email">Email</label>
-				<input id="email" name="email" type="email" autocomplete="email" required />
-			</div>
-			<div class="field">
-				<label for="password">Password</label>
-				<input
-					id="password"
-					name="password"
-					type="password"
-					autocomplete="current-password"
-					required
-				/>
-			</div>
-			<div class="actions">
-				<button type="submit" formaction="?/signin" class="btn-primary">Sign in</button>
-				<button type="submit" formaction="?/signup" class="btn-ghost">Create account</button>
-			</div>
-		</form>
-
-		<div class="divider"><span>or</span></div>
-
 		<form method="POST" action="?/google" use:enhance>
 			<button type="submit" class="btn-outline">Continue with Google</button>
 		</form>
@@ -88,74 +65,6 @@
 		gap: 0.75rem;
 	}
 
-	.field {
-		display: flex;
-		flex-direction: column;
-		gap: 0.375rem;
-	}
-
-	label {
-		font-size: 0.8125rem;
-		font-weight: 500;
-		color: var(--text);
-		letter-spacing: 0.01em;
-	}
-
-	input {
-		padding: 0.625rem 0.875rem;
-		border: 1px solid var(--border);
-		border-radius: 8px;
-		background: var(--cream);
-		color: var(--text);
-		font-size: 1rem;
-		outline: none;
-		transition: border-color 0.15s;
-		width: 100%;
-	}
-
-	input:focus {
-		border-color: var(--dusty-rose);
-	}
-
-	.actions {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-		margin-top: 0.25rem;
-	}
-
-	.btn-primary {
-		width: 100%;
-		padding: 0.75rem;
-		background: var(--mocha);
-		color: white;
-		border: none;
-		border-radius: var(--radius-btn);
-		font-size: 0.9375rem;
-		font-weight: 500;
-		letter-spacing: 0.02em;
-		transition: background 0.15s;
-	}
-
-	.btn-primary:hover {
-		background: var(--dusty-rose);
-	}
-
-	.btn-ghost {
-		width: 100%;
-		padding: 0.625rem;
-		background: transparent;
-		color: var(--text-light);
-		border: none;
-		border-radius: var(--radius-btn);
-		font-size: 0.875rem;
-		transition: color 0.15s;
-	}
-
-	.btn-ghost:hover {
-		color: var(--dusty-rose);
-	}
-
 	.btn-outline {
 		width: 100%;
 		padding: 0.75rem;
@@ -173,24 +82,6 @@
 	.btn-outline:hover {
 		border-color: var(--dusty-rose);
 		background: var(--cream);
-	}
-
-	.divider {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-		color: var(--text-light);
-		font-size: 0.75rem;
-		letter-spacing: 0.05em;
-		text-transform: uppercase;
-	}
-
-	.divider::before,
-	.divider::after {
-		content: '';
-		flex: 1;
-		height: 1px;
-		background: var(--border);
 	}
 
 	.error {

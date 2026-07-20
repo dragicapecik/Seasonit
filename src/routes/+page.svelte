@@ -217,41 +217,6 @@
 					{modalMode === 'login' ? 'Continue with Google' : 'Sign up with Google'}
 				</button>
 			</form>
-
-			<div class="modal-divider"><span>or</span></div>
-
-			{#if modalMode === 'login'}
-				<form method="POST" action="?/signin" use:enhance>
-					<div class="modal-inputs">
-						<input class="modal-input" type="email" name="email" placeholder="Email address" required />
-						<input class="modal-input" type="password" name="password" placeholder="Password" required />
-					</div>
-					<button type="submit" class="btn-full">Sign in</button>
-				</form>
-				<p class="modal-toggle">
-					Don't have an account?
-					<button type="button" on:click={() => (modalMode = 'signup')}>Create one</button>
-				</p>
-			{:else}
-				<form method="POST" action="?/signup" use:enhance>
-					<div class="modal-inputs">
-						<input class="modal-input" type="email" name="email" placeholder="Email address" required />
-						<input
-							class="modal-input"
-							type="password"
-							name="password"
-							placeholder="Create password"
-							minlength="8"
-							required
-						/>
-					</div>
-					<button type="submit" class="btn-full">Create account</button>
-				</form>
-				<p class="modal-toggle">
-					Already have an account?
-					<button type="button" on:click={() => (modalMode = 'login')}>Sign in</button>
-				</p>
-			{/if}
 		</div>
 	</div>
 {/if}
@@ -758,83 +723,14 @@
 
 	.btn-google-full:hover { border-color: var(--l-rose); }
 
-	.modal-divider {
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
-		font-size: 0.72rem;
-		color: var(--l-ink-muted);
-		letter-spacing: 0.1em;
-		margin: 1rem 0;
-	}
-
-	.modal-divider::before,
-	.modal-divider::after {
-		content: '';
-		flex: 1;
-		height: 1px;
-		background: rgba(20, 20, 20, 0.1);
-	}
-
-	.modal-inputs {
-		display: flex;
-		flex-direction: column;
-		gap: 0.625rem;
-		margin-bottom: 0.875rem;
-	}
-
-	.modal-input {
-		padding: 0.75rem 1rem;
-		border: 1px solid rgba(20, 20, 20, 0.15);
-		border-radius: 2px;
-		font-family: var(--font-body);
-		font-size: 0.875rem;
-		color: var(--l-ink);
-		background: white;
-		outline: none;
-		transition: border-color 0.2s;
-	}
-
-	.modal-input:focus { border-color: var(--l-rose); }
-
-	.btn-full {
-		width: 100%;
-		padding: 0.8rem;
-		background: var(--l-rose);
-		border: none;
-		border-radius: 2px;
-		font-family: var(--font-body);
-		font-size: 0.875rem;
-		font-weight: 500;
-		color: white;
-		cursor: pointer;
-		transition: background 0.2s;
-	}
-
-	.btn-full:hover { background: var(--l-rose-deep); }
-
-	.modal-toggle {
-		font-size: 0.8rem;
-		color: var(--l-ink-muted);
-		text-align: center;
-		margin-top: 1rem;
-	}
-
-	.modal-toggle button {
-		background: none;
-		border: none;
-		color: var(--l-rose);
-		cursor: pointer;
-		font-size: inherit;
-		font-family: inherit;
-		padding: 0;
-		text-decoration: underline;
-	}
-
 	/* ── Responsive ── */
 	@media (max-width: 768px) {
 		nav {
 			padding: 1rem 1.5rem;
+		}
+
+		.nav-links {
+			gap: 1.25rem;
 		}
 
 		.header-bar {
@@ -847,10 +743,23 @@
 		.header-cta {
 			align-items: flex-start;
 			max-width: 100%;
+			width: 100%;
 		}
 
 		.header-sub {
 			text-align: left;
+		}
+
+		.cta-row {
+			flex-direction: column;
+			align-items: stretch;
+			width: 100%;
+		}
+
+		.btn-primary,
+		.btn-google {
+			width: 100%;
+			justify-content: center;
 		}
 
 		.section {
@@ -866,6 +775,12 @@
 			padding: 2rem 1.5rem;
 			flex-direction: column;
 			align-items: flex-start;
+		}
+	}
+
+	@media (max-width: 560px) {
+		.nav-links a {
+			display: none;
 		}
 	}
 </style>
