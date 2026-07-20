@@ -59,8 +59,8 @@
 	<div class="fabric-texture" aria-hidden="true"></div>
 
 	<div class="header-title">
-		<p class="eyebrow">Your colour season awaits</p>
-		<h1>Dress in your <em>natural light</em></h1>
+		<p class="eyebrow">You found your season.</p>
+		<h1>Shopping for it <em>should be easy.</em></h1>
 	</div>
 
 	<div class="header-cta">
@@ -244,16 +244,16 @@
 		align-items: center;
 		justify-content: space-between;
 		padding: 1.25rem 4rem;
-		background: rgba(250, 246, 241, 0.92);
+		background: rgba(20, 20, 20, 0.88);
 		backdrop-filter: blur(12px);
-		border-bottom: 1px solid rgba(181, 80, 46, 0.12);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 	}
 
 	.nav-logo {
 		font-family: var(--font-heading);
 		font-size: 1.6rem;
 		font-weight: 500;
-		color: var(--l-ink);
+		color: #f5ede6;
 		letter-spacing: 0.04em;
 		text-decoration: none;
 	}
@@ -274,13 +274,13 @@
 		font-size: 0.8rem;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
-		color: var(--l-ink-soft);
+		color: rgba(245, 237, 230, 0.55);
 		text-decoration: none;
 		transition: color 0.2s;
 	}
 
 	.nav-links a:hover {
-		color: var(--l-rose);
+		color: #f5ede6;
 	}
 
 	.btn-nav {
@@ -289,17 +289,17 @@
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
 		padding: 0.5rem 1.25rem;
-		border: 1px solid var(--l-rose);
+		border: 1px solid rgba(245, 237, 230, 0.35);
 		background: transparent;
-		color: var(--l-rose);
+		color: #f5ede6;
 		border-radius: 2px;
 		cursor: pointer;
-		transition: background 0.2s, color 0.2s;
+		transition: background 0.2s, border-color 0.2s;
 	}
 
 	.btn-nav:hover {
-		background: var(--l-rose);
-		color: white;
+		background: rgba(245, 237, 230, 0.1);
+		border-color: rgba(245, 237, 230, 0.6);
 	}
 
 	/* ── Header bar ── */
@@ -308,15 +308,18 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 4rem;
-		padding: 6rem 4rem 2.5rem;
+		padding: 7rem 4rem 4rem;
 		position: relative;
-		border-bottom: 1px solid rgba(20, 20, 20, 0.07);
+		background: var(--l-ink);
+		border-bottom: none;
 	}
 
 	.header-bg {
 		position: absolute;
 		inset: 0;
-		background: radial-gradient(ellipse 70% 120% at 15% 60%, rgba(232, 201, 187, 0.28) 0%, transparent 70%);
+		background:
+			radial-gradient(ellipse 55% 90% at 5% 80%, rgba(181, 80, 46, 0.18) 0%, transparent 65%),
+			radial-gradient(ellipse 40% 60% at 90% 20%, rgba(181, 80, 46, 0.08) 0%, transparent 60%);
 		pointer-events: none;
 	}
 
@@ -350,7 +353,7 @@
 		font-weight: 700;
 		letter-spacing: -0.01em;
 		line-height: 1.05;
-		color: var(--l-ink);
+		color: #f5ede6;
 		margin: 0;
 	}
 
@@ -374,7 +377,7 @@
 		font-family: var(--font-heading);
 		font-size: 1rem;
 		font-weight: 300;
-		color: var(--l-ink-soft);
+		color: rgba(245, 237, 230, 0.6);
 		line-height: 1.6;
 		text-align: right;
 		margin: 0;
@@ -413,26 +416,26 @@
 		align-items: center;
 		gap: 0.5rem;
 		padding: 0.7rem 1rem;
-		background: white;
-		border: 1px solid rgba(20, 20, 20, 0.15);
+		background: rgba(255, 255, 255, 0.07);
+		border: 1px solid rgba(245, 237, 230, 0.2);
 		border-radius: 2px;
 		font-family: var(--font-body);
 		font-size: 0.8125rem;
 		font-weight: 500;
-		color: var(--l-ink);
+		color: #f5ede6;
 		cursor: pointer;
-		transition: border-color 0.2s, box-shadow 0.2s;
+		transition: background 0.2s, border-color 0.2s;
 		white-space: nowrap;
 	}
 
 	.btn-google:hover {
-		border-color: var(--l-rose);
-		box-shadow: 0 2px 8px rgba(181, 80, 46, 0.12);
+		background: rgba(255, 255, 255, 0.13);
+		border-color: rgba(245, 237, 230, 0.45);
 	}
 
 	.header-note {
 		font-size: 0.7rem;
-		color: var(--l-ink-muted);
+		color: rgba(245, 237, 230, 0.35);
 	}
 
 	/* ── Sections ── */

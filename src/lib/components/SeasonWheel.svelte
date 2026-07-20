@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
+	import { onMount } from 'svelte';
 	import { SEASONS, FAMILY_COLORS } from '$lib/data/seasons';
 	import { colorMood } from '$lib/utils/colorMood';
 
@@ -31,6 +32,23 @@
 	});
 
 	let selected: (typeof nodes)[0] | null = null;
+	let isTouchDevice = false;
+
+	onMount(() => {
+		isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+	});
+
+	function handleNodeInteraction(node: typeof nodes[0]) {
+		if (isTouchDevice) {
+			selected = selected?.id === node.id ? null : node;
+		} else {
+			selected = node;
+		}
+	}
+
+	function closeSheet() {
+		selected = null;
+	}
 
 	$: moods = selected ? [...new Set(selected.swatches.map(colorMood))] : [];
 </script>
@@ -71,8 +89,9 @@
 					<g
 						class="node"
 						class:active={selected?.id === node.id}
-						on:mouseenter={() => (selected = node)}
-						on:click={() => (selected = node)}
+						on:mouseenter={() => !isTouchDevice && (selected = node)}
+						on:mouseleave={() => !isTouchDevice && (selected = null)}
+						on:click={() => handleNodeInteraction(node)}
 						role="img"
 						aria-label={node.name}
 					>
@@ -87,68 +106,127 @@
 			</svg>
 		</div>
 
-		<div class="info-side">
-			{#if selected}
-				{#key selected.id}
-					<div class="info-content" in:fade={{ duration: 180 }}>
-						<span class="family-tag" style="color:{FAMILY_COLORS[selected.family]}">{selected.family}</span>
-						<h3 class="season-name">{selected.name}</h3>
-						<p class="undertone">{selected.undertone}</p>
-
-						<div class="divider"></div>
-
-						<div class="trait-row">
-							<span class="trait-label">Skin</span>
-							<div class="trait-dots">
-								{#each selected.skin as s}
-									<span class="trait-dot" style="background:{s.hex}" title={s.label}></span>
+		<!-- Desktop info panel (hidden on touch) -->
+		{#if !isTouchDevice}
+			<div class="info-side">
+				{#if selected}
+					{#key selected.id}
+						<div class="info-content" in:fade={{ duration: 180 }}>
+							<span class="family-tag" style="color:{FAMILY_COLORS[selected.family]}">{selected.family}</span>
+							<h3 class="season-name">{selected.name}</h3>
+							<p class="undertone">{selected.undertone}</p>
+							<div class="divider"></div>
+							<div class="trait-row">
+								<span class="trait-label">Skin</span>
+								<div class="trait-dots">
+									{#each selected.skin as s}
+										<span class="trait-dot" style="background:{s.hex}" title={s.label}></span>
+									{/each}
+								</div>
+							</div>
+							<div class="trait-row">
+								<span class="trait-label">Eyes</span>
+								<div class="trait-dots">
+									{#each selected.eyes as eye}
+										<span class="trait-dot" style="background:{eye.hex}" title={eye.label}></span>
+									{/each}
+								</div>
+							</div>
+							<div class="trait-row">
+								<span class="trait-label">Hair</span>
+								<div class="trait-dots">
+									{#each selected.hair as h}
+										<span class="trait-dot hair-dot" style="background:{h.hex}" title={h.label}></span>
+									{/each}
+								</div>
+							</div>
+							<div class="divider"></div>
+							<p class="desc">{selected.desc}</p>
+							<div class="swatches">
+								{#each selected.swatches as color}
+									<span
+										class="swatch"
+										style="background:{color}{color === '#FFFFFF' ? '; border:1px solid #e8ddd6' : ''}"
+										title={color}
+									></span>
+								{/each}
+							</div>
+							<div class="mood-tags">
+								{#each moods as mood}
+									<span class="mood-tag">{mood}</span>
 								{/each}
 							</div>
 						</div>
-						<div class="trait-row">
-							<span class="trait-label">Eyes</span>
-							<div class="trait-dots">
-								{#each selected.eyes as eye}
-									<span class="trait-dot" style="background:{eye.hex}" title={eye.label}></span>
-								{/each}
-							</div>
-						</div>
-						<div class="trait-row">
-							<span class="trait-label">Hair</span>
-							<div class="trait-dots">
-								{#each selected.hair as h}
-									<span class="trait-dot hair-dot" style="background:{h.hex}" title={h.label}></span>
-								{/each}
-							</div>
-						</div>
-
-						<div class="divider"></div>
-
-						<p class="desc">{selected.desc}</p>
-						<div class="swatches">
-							{#each selected.swatches as color}
-								<span
-									class="swatch"
-									style="background:{color}{color === '#FFFFFF' ? '; border:1px solid #e8ddd6' : ''}"
-									title={color}
-								></span>
-							{/each}
-						</div>
-
-						<div class="mood-tags">
-							{#each moods as mood}
-								<span class="mood-tag">{mood}</span>
-							{/each}
-						</div>
+					{/key}
+				{:else}
+					<div class="info-empty" in:fade={{ duration: 180 }}>
+						<p class="empty-hint">Hover a season<br/>to explore its palette.</p>
 					</div>
-				{/key}
-			{:else}
-				<div class="info-empty" in:fade={{ duration: 180 }}>
-					<p class="empty-hint">Hover a season<br/>to explore its palette.</p>
-				</div>
-			{/if}
-		</div>
+				{/if}
+			</div>
+		{/if}
 	</div>
+
+	<!-- Mobile bottom sheet -->
+	{#if isTouchDevice && selected}
+		<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions -->
+		<div class="sheet-backdrop" on:click={closeSheet} transition:fade={{ duration: 180 }}></div>
+		{#key selected.id}
+			<div class="bottom-sheet" transition:fly={{ y: 320, duration: 280, opacity: 1 }}>
+				<div class="sheet-handle"></div>
+				<button class="sheet-close" on:click={closeSheet} aria-label="Close">×</button>
+
+				<span class="family-tag" style="color:{FAMILY_COLORS[selected.family]}">{selected.family}</span>
+				<h3 class="season-name">{selected.name}</h3>
+				<p class="undertone">{selected.undertone}</p>
+
+				<div class="divider"></div>
+
+				<div class="trait-row">
+					<span class="trait-label">Skin</span>
+					<div class="trait-dots">
+						{#each selected.skin as s}
+							<span class="trait-dot" style="background:{s.hex}" title={s.label}></span>
+						{/each}
+					</div>
+				</div>
+				<div class="trait-row">
+					<span class="trait-label">Eyes</span>
+					<div class="trait-dots">
+						{#each selected.eyes as eye}
+							<span class="trait-dot" style="background:{eye.hex}" title={eye.label}></span>
+						{/each}
+					</div>
+				</div>
+				<div class="trait-row">
+					<span class="trait-label">Hair</span>
+					<div class="trait-dots">
+						{#each selected.hair as h}
+							<span class="trait-dot hair-dot" style="background:{h.hex}" title={h.label}></span>
+						{/each}
+					</div>
+				</div>
+
+				<div class="divider"></div>
+
+				<p class="desc">{selected.desc}</p>
+				<div class="swatches">
+					{#each selected.swatches as color}
+						<span
+							class="swatch"
+							style="background:{color}{color === '#FFFFFF' ? '; border:1px solid #e8ddd6' : ''}"
+							title={color}
+						></span>
+					{/each}
+				</div>
+				<div class="mood-tags">
+					{#each moods as mood}
+						<span class="mood-tag">{mood}</span>
+					{/each}
+				</div>
+			</div>
+		{/key}
+	{/if}
 {/if}
 
 <style>
@@ -337,6 +415,50 @@
 		color: var(--text-light);
 		line-height: 1.5;
 		margin: 0;
+	}
+
+	/* ── Bottom sheet ── */
+	.sheet-backdrop {
+		position: fixed;
+		inset: 0;
+		background: rgba(20, 20, 20, 0.4);
+		z-index: 300;
+		backdrop-filter: blur(2px);
+	}
+
+	.bottom-sheet {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 301;
+		background: var(--cream);
+		border-radius: 16px 16px 0 0;
+		padding: 1rem 1.5rem 2.5rem;
+		max-height: 72vh;
+		overflow-y: auto;
+		box-shadow: 0 -4px 32px rgba(20, 20, 20, 0.18);
+	}
+
+	.sheet-handle {
+		width: 36px;
+		height: 4px;
+		background: var(--border);
+		border-radius: 2px;
+		margin: 0 auto 1.25rem;
+	}
+
+	.sheet-close {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		background: none;
+		border: none;
+		font-size: 1.5rem;
+		line-height: 1;
+		color: var(--text-light);
+		cursor: pointer;
+		padding: 0.2rem 0.5rem;
 	}
 
 	/* ── Responsive ── */
