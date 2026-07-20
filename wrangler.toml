@@ -10,3 +10,7 @@ directory = ".svelte-kit/cloudflare"
 [observability.logs]
 enabled = true
 invocation_logs = true
+
+[vars]
+PUBLIC_SUPABASE_URL = "https://bmvceuxgjbgwaaszcsbw.supabase.co"
+PUBLIC_SUPABASE_ANON_KEY = "sb_publishable_p8Cm8dqmdXw66rs52m0eMg_x0Y_vJ3D"
